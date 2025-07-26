@@ -30,7 +30,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/smartorder-backend ./backend
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/smartorder-backend 
 
     - name: Push Docker image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/smartorder-backend
