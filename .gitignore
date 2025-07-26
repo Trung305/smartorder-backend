@@ -1,0 +1,8 @@
+# .gitignore
+.vs/
+*.user
+*.suo
+bin/
+obj/
+logs/
+*.vsidx

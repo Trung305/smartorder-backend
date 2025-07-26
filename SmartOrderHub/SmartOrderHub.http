@@ -1,0 +1,6 @@
+@SmartOrderHub_HostAddress = http://localhost:5282
+
+GET {{SmartOrderHub_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

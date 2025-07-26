@@ -1,0 +1,150 @@
+services:
+  product-service:
+    build:
+      context: ./ProductService
+    ports:
+      - "9001:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=SmartOrderHub;User Id=Trungpk;Password=12345678;Encrypt=False
+      - REDIS_CONNECTION=redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    volumes:
+      - ./logs/product-service:/app/Logs
+    depends_on:
+      - sqlserver
+      - redis
+      - elasticsearch
+    networks:
+      - smartorderhub-net
+
+  inventory-service:
+    build:
+      context: ./InventoryService
+    ports:
+      - "9002:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=host.docker.internal;Port=5432;Database=Inventory;Username=Trungpk;Password=12345678
+      - REDIS_CONNECTION=redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    volumes:
+      - ./logs/inventory-service:/app/Logs
+    depends_on:
+      - postgres
+      - elasticsearch
+    networks:
+      - smartorderhub-net
+
+  order-service:
+    build:
+      context: ./OrderService
+    ports:
+      - "9003:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal;Database=SmartOrderHub;User Id=Trungpk;Password=12345678;Encrypt=False
+      - REDIS_CONNECTION=redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    volumes:
+      - ./logs/order-service:/app/Logs
+    depends_on:
+      - sqlserver
+      - redis
+      - elasticsearch
+    networks:
+      - smartorderhub-net
+
+  user-service:
+    build:
+      context: ./UserService
+    ports:
+      - "9004:8080"
+    environment:
+      - MONGO_URI=mongodb://host.docker.internal:27017
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    volumes:
+      - ./logs/user-service:/app/Logs
+    depends_on:
+      - mongo
+      - elasticsearch
+    networks:
+      - smartorderhub-net
+
+  postgres:
+    image: postgres:15
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: Trungpk
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: Inventory
+    networks:
+      - smartorderhub-net
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      TRUNGPK_PASSWORD: 12345678
+      ACCEPT_EULA: "Y"
+    networks:
+      - smartorderhub-net
+
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - smartorderhub-net
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - smartorderhub-net
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.14
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+
+  # logstash:
+  #   image: docker.elastic.co/logstash/logstash:7.17.14
+  #   container_name: logstash
+  #   volumes:
+  #     - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+  #   ports:
+  #     - "5000:5000"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.14
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+networks:
+  smartorderhub-net:
+    driver: bridge
+
+volumes:
+  mongo-data:

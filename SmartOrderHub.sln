@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService", "OrderService\OrderService.csproj", "{BAD02B6F-98D4-4A3D-9AD5-835BD6702EC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryService", "InventoryService\InventoryService.csproj", "{19B61498-0C42-4F06-AD53-56FE9B6A90AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{52FC64D8-E333-4181-BAA3-D923B6425B34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductService", "ProductService\ProductService.csproj", "{D62A4698-80E3-4C93-A276-1DDC1E307D27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		logstash.conf = logstash.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{E039148E-FF45-4BFD-BF84-53D241E55FF8}"
+	ProjectSection(SolutionItems) = preProject
+		ci-cd.yml = ci-cd.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAD02B6F-98D4-4A3D-9AD5-835BD6702EC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD02B6F-98D4-4A3D-9AD5-835BD6702EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD02B6F-98D4-4A3D-9AD5-835BD6702EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD02B6F-98D4-4A3D-9AD5-835BD6702EC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19B61498-0C42-4F06-AD53-56FE9B6A90AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19B61498-0C42-4F06-AD53-56FE9B6A90AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19B61498-0C42-4F06-AD53-56FE9B6A90AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19B61498-0C42-4F06-AD53-56FE9B6A90AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52FC64D8-E333-4181-BAA3-D923B6425B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52FC64D8-E333-4181-BAA3-D923B6425B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52FC64D8-E333-4181-BAA3-D923B6425B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52FC64D8-E333-4181-BAA3-D923B6425B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D62A4698-80E3-4C93-A276-1DDC1E307D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62A4698-80E3-4C93-A276-1DDC1E307D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62A4698-80E3-4C93-A276-1DDC1E307D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62A4698-80E3-4C93-A276-1DDC1E307D27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E039148E-FF45-4BFD-BF84-53D241E55FF8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69910DE1-E6CA-4F8D-B12B-E53CC8E00617}
+	EndGlobalSection
+EndGlobal
